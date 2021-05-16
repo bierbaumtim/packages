@@ -387,12 +387,24 @@ class MarkdownBuilder implements md.NodeVisitor {
           );
         }
       } else if (tag == 'table') {
-        child = Table(
-          defaultColumnWidth: styleSheet.tableColumnWidth!,
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          border: styleSheet.tableBorder,
-          children: _tables.removeLast().rows,
-        );
+        if (styleSheet.horizonalScrollableTable) {
+          child = SingleChildScrollView(
+            child: Table(
+              defaultColumnWidth: IntrinsicColumnWidth(),
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              border: styleSheet.tableBorder,
+              children: _tables.removeLast().rows,
+            ),
+            scrollDirection: Axis.horizontal,
+          );
+        } else {
+          child = Table(
+            defaultColumnWidth: styleSheet.tableColumnWidth,
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            border: styleSheet.tableBorder,
+            children: _tables.removeLast().rows,
+          );
+        }
       } else if (tag == 'blockquote') {
         _isInBlockquote = false;
         child = DecoratedBox(

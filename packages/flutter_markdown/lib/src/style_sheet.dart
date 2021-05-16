@@ -52,6 +52,7 @@ class MarkdownStyleSheet {
     this.blockquoteAlign = WrapAlignment.start,
     this.codeblockAlign = WrapAlignment.start,
     this.textScaleFactor,
+    this.horizonalScrollableTable = false,
   }) : _styles = <String, TextStyle?>{
           'a': a,
           'p': p,
@@ -346,6 +347,7 @@ class MarkdownStyleSheet {
     WrapAlignment? blockquoteAlign,
     WrapAlignment? codeblockAlign,
     double? textScaleFactor,
+    bool? horizonalScrollableTable,
   }) {
     return MarkdownStyleSheet(
       a: a ?? this.a,
@@ -392,6 +394,8 @@ class MarkdownStyleSheet {
       blockquoteAlign: blockquoteAlign ?? this.blockquoteAlign,
       codeblockAlign: codeblockAlign ?? this.codeblockAlign,
       textScaleFactor: textScaleFactor ?? this.textScaleFactor,
+      horizonalScrollableTable:
+          horizonalScrollableTable ?? this.horizonalScrollableTable,
     );
   }
 
@@ -445,6 +449,7 @@ class MarkdownStyleSheet {
       blockquoteAlign: other.blockquoteAlign,
       codeblockAlign: other.codeblockAlign,
       textScaleFactor: other.textScaleFactor,
+      horizonalScrollableTable: other.horizonalScrollableTable,
     );
   }
 
@@ -519,6 +524,10 @@ class MarkdownStyleSheet {
 
   /// The [TableColumnWidth] to use for `th` and `td` elements.
   final TableColumnWidth? tableColumnWidth;
+
+  /// Indicates if Tables are horizontal scrollable.
+  /// `tableColumnWidth` will be ignored and `IntrinsicColumnWidth` will be used.
+  final bool horizonalScrollableTable;
 
   /// The padding to use for `th` and `td` elements.
   final EdgeInsets? tableCellsPadding;
